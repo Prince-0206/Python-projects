@@ -14,14 +14,15 @@ def generate_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     password = "".join(random.choice(characters) for _ in range(length))
     return password
+
 def save_password(service, password):
     passwords[service] = password
-    with open("passwords.txt", "w") as file:
-        for service, password in passwords.items():
-            file.write(f"{service}:{password}\n")
+    with open("passwords.txt", "a") as file:
+        file.write(f"{service}:{password}\n")
+
 def get_password(service):
     return passwords.get(service, "No password found for this service.")
-def main():
+def main(): 
     while True:
         print("\nPassword Manager")
         print("1. Generate Password")
@@ -53,3 +54,5 @@ def main():
         
         else:
             print("Invalid choice. Please try again.")  
+if __name__ == "__main__":
+    main()
